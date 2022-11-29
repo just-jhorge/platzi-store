@@ -8,6 +8,7 @@ import Checkout from "./pages/checkout/Checkout";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import CategoryProducts from "./pages/categoryProducts/CategoryProducts";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
 	return (
@@ -25,6 +26,7 @@ const App = () => {
 					<Route path="/products/category" element={<CategoryProducts />} />
 				</Routes>
 			</div>
+			<Footer />
 		</div>
 	);
 };
