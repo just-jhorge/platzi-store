@@ -2,6 +2,8 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const CartContext = createContext({
+	cartItems: [],
+	setCartItems: () => {},
 	product: null,
 	setProduct: () => {},
 	products: [],
@@ -17,6 +19,7 @@ const CartContextWrapper = ({ children }) => {
 	const [categories, setCategories] = useState([]);
 	const [products, setProducts] = useState([]);
 	const [product, setProduct] = useState(null);
+	const [cartItems, setCartItems] = useState([]);
 	const [cartValue, setCartValue] = useState(0);
 
 	useEffect(() => {
@@ -54,8 +57,14 @@ const CartContextWrapper = ({ children }) => {
 		setProduct(response.data);
 	};
 
-	const addToCart = () => {
-		console.log("item added to cart");
+	const addToCart = (item) => {
+		if (cartItems.some((product) => product.id == item.id)) {
+			alert("Item already in cart");
+		} else {
+			setCartItems([item, ...cartItems]);
+			setCartValue(cartItems.length + 1);
+		}
+		console.log(cartItems);
 	};
 
 	const removeFromCart = () => {
@@ -77,6 +86,8 @@ const CartContextWrapper = ({ children }) => {
 		categoryProducts,
 		setCategoryProducts,
 		getProductsByCategory,
+		cartItems,
+		setCartItems,
 	};
 
 	return (
